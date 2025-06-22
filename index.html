@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bugged Hangman</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1 class="title">🎯Bugged Hangman</h1>
+            <div class="game-controls">
+                <select class="difficulty-selector" id="difficulty">
+                    <option value="easy">Easy (4-5 letters)</option>
+                    <option value="medium">Medium (6-7 letters)</option>
+                    <option value="hard">Hard (8+ letters)</option>
+                </select>
+                <button class="theme-toggle" id="themeToggle">🌙 Dark Mode</button>
+            </div>
+        </div>
+
+        <div class="game-stats">
+            <div class="stat-card">
+                <span class="stat-value" id="livesCount">6</span>
+                <span class="stat-label">Lives</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value timer" id="timer">60</span>
+                <span class="stat-label">Time</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="timerProgress"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="scoreCount">0</span>
+                <span class="stat-label">Score</span>
+            </div>
+        </div>
+
+        <div class="hangman-display">
+            <div class="hangman-drawing">
+                <svg class="hangman-svg" viewBox="0 0 150 180">
+                    <!-- Gallows -->
+                    <line x1="10" y1="170" x2="80" y2="170" stroke="white" stroke-width="3" opacity="1"/>
+                    <line x1="20" y1="170" x2="20" y2="20" stroke="white" stroke-width="3" opacity="1"/>
+                    <line x1="20" y1="20" x2="60" y2="20" stroke="white" stroke-width="3" opacity="1"/>
+                    <line x1="60" y1="20" x2="60" y2="35" stroke="white" stroke-width="3" opacity="1"/>
+                    
+                    <!-- Head -->
+                    <circle cx="60" cy="45" r="10" stroke="white" stroke-width="2" fill="none" class="hangman-part" id="head" opacity="0"/>
+                    
+                    <!-- Body -->
+                    <line x1="60" y1="55" x2="60" y2="120" stroke="white" stroke-width="2" class="hangman-part" id="body" opacity="0"/>
+                    
+                    <!-- Left arm -->
+                    <line x1="60" y1="75" x2="40" y2="95" stroke="white" stroke-width="2" class="hangman-part" id="leftArm" opacity="0"/>
+                    
+                    <!-- Right arm -->
+                    <line x1="60" y1="75" x2="80" y2="95" stroke="white" stroke-width="2" class="hangman-part" id="rightArm" opacity="0"/>
+                    
+                    <!-- Left leg -->
+                    <line x1="60" y1="120" x2="45" y2="145" stroke="white" stroke-width="2" class="hangman-part" id="leftLeg" opacity="0"/>
+                    
+                    <!-- Right leg -->
+                    <line x1="60" y1="120" x2="75" y2="145" stroke="white" stroke-width="2" class="hangman-part" id="rightLeg" opacity="0"/>
+                </svg>
+            </div>
+
+            <div class="game-info">
+                <div class="hint-box">
+                    <div class="hint-title">💡 Hint:</div>
+                    <div id="hintText">Choose difficulty and start playing!</div>
+                </div>
+                <div class="hint-box">
+                    <div class="hint-title">📝 Category:</div>
+                    <div id="categoryText">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="word-display">
+            <div class="word-letters" id="wordDisplay">_ _ _ _ _</div>
+        </div>
+
+        <div class="alphabet" id="alphabet"></div>
+
+        <div class="game-actions">
+            <button class="btn" id="newGameBtn">🎮 New Game</button>
+            <button class="btn secondary" id="hintBtn">💡 Extra Hint</button>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="modal" id="gameOverModal">
+        <div class="modal-content">
+            <h2 id="gameOverTitle">Game Over!</h2>
+            <p id="gameOverMessage">Better luck next time!</p>
+            <p id="correctWord"></p>
+            <button class="btn" id="playAgainBtn">🔄 Play Again</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
